@@ -12,7 +12,7 @@
 *   ⚡ **极简交互**：只需粘贴文本，一键获取洞察。
 
 **🖥️ 在线体验**
-**👉 [点击这里体验Live Demo](你的部署链接)**
+**👉 [点击这里体验Live Demo]([你的部署链接](https://chenyusamo.github.io/DialogueMind-/))**
 
 ![DialogueMind 界面截图](这里可以后续替换成截图URL，暂时留空)
 

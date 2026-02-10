@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DialogueMind - AI对话解析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">🧠 DialogueMind</h1>
+        <p class="text-center text-gray-600 mb-8">粘贴一段对话，让AI提取行动项和关键信息。</p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+                <h2 class="text-xl font-semibold">输入对话</h2>
+                <textarea id="dialogueInput" rows="15" class="w-full p-4 border rounded-lg shadow-sm" placeholder="例如：
+小明：我们下周一下午2点开会讨论项目A的UI设计。
+小红：好的，我会准备好设计稿。另外，记得叫上后端开发小李。
+小明：没问题，我通知他。会议链接稍后发群里。
+...">小明：我们下周一下午2点开会讨论项目A的UI设计。
+小红：好的，我会准备好设计稿。另外，记得叫上后端开发小李。
+小明：没问题，我通知他。会议链接稍后发群里。</textarea>
+                <button onclick="analyzeDialogue()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-200">
+                    开始AI解析
+                </button>
+                <p class="text-sm text-gray-500">提示：此为安全演示版本，使用模拟数据，无需API密钥。</p>
+            </div>
+
+            <div class="space-y-6">
+                <h2 class="text-xl font-semibold">AI解析结果</h2>
+                <div id="resultContainer" class="space-y-4">
+                    <p class="text-gray-500 italic">解析结果将显示在这里...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function analyzeDialogue() {
+        const input = document.getElementById('dialogueInput').value;
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = '<p class="text-blue-500">AI正在思考...</p>';
+
+        // 安全演示：使用模拟数据，不调用真实API
+        setTimeout(() => {
+            const mockAnalysis = {
+                action_items: ["小明：通知后端开发小李参加会议", "小红：准备项目A的UI设计稿", "小明：在群里发送会议链接"],
+                key_info: ["会议时间：下周一下午2点", "会议主题：项目A的UI设计讨论", "参会人：小明、小红、小李"],
+                summary: "团队计划于下周一下午2点召开会议，讨论项目A的UI设计。小红负责准备设计稿，小明负责通知小李并发布会议链接。"
+            };
+            displayResult(mockAnalysis);
+        }, 800);
+    }
+
+    function displayResult(analysis) {
+        const container = document.getElementById('resultContainer');
+        let html = `
+            <div class="bg-white p-4 rounded-lg border shadow">
+                <h3 class="font-bold text-lg text-gray-800 mb-3">📝 行动项</h3>
+                <ul class="list-disc pl-5 space-y-1 mb-4">
+                    ${analysis.action_items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+                <h3 class="font-bold text-lg text-gray-800 mb-3">🔑 关键信息</h3>
+                <ul class="list-disc pl-5 space-y-1 mb-4">
+                    ${analysis.key_info.map(info => `<li>${info}</li>`).join('')}
+                </ul>
+                <h3 class="font-bold text-lg text-gray-800 mb-3">📄 对话摘要</h3>
+                <p class="text-gray-700">${analysis.summary}</p>
+            </div>
+        `;
+        container.innerHTML = html;
+    }
+    </script>
+</body>
+</html>
